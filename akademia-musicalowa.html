@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akademia Musicalowa — Odkryj scenę w sobie</title>
+<meta name="description" content="Akademia śpiewu, tańca i aktorstwa musicalowego dla dzieci i młodzieży. Zapisy na sezon 2026/2027 trwają.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  /* ============ TOKENS ============ */
+  :root{
+    --ink:#010101;
+    --ink-soft:#4A453D;
+    --cream:#F1EADD;
+    --cream-alt:#E8DFCC;
+    --paper:#FBF8F2;
+    --gold:#B07F35;
+    --gold-deep:#8C6425;
+    --gold-pale:#D9B679;
+    --line:rgba(28,26,23,0.16);
+    --line-soft:rgba(28,26,23,0.09);
+
+    --sp-1:8px; --sp-2:16px; --sp-3:24px; --sp-4:40px;
+    --sp-5:64px; --sp-6:96px; --sp-7:128px;
+
+    --display:'Montserrat', -apple-system, sans-serif;
+    --body:'Montserrat', -apple-system, sans-serif;
+
+    --ease:cubic-bezier(.22,.68,0,1);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{display:block;max-width:100%;}
+  a{color:inherit;}
+  h1,h2,h3,h4{font-family:var(--display);font-weight:600;margin:0;line-height:1.05;letter-spacing:-0.01em;}
+  p{margin:0;}
+  ul{margin:0;padding:0;list-style:none;}
+  button{font-family:inherit;cursor:pointer;background:none;border:none;color:inherit;}
+
+  :focus-visible{outline:2px solid var(--gold-deep);outline-offset:3px;}
+
+  .wrap{max-width:1280px;margin:0 auto;padding-left:var(--sp-3);padding-right:var(--sp-3);}
+  @media(min-width:1024px){.wrap{padding-left:var(--sp-5);padding-right:var(--sp-5);}}
+
+  .eyebrow{
+    font-family:var(--body);
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--gold-deep);
+    display:block;
+    margin-bottom:var(--sp-2);
+  }
+
+  /* faint paper grain, applied once, fixed */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    z-index:0;
+    opacity:0.5;
+    mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.02 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ============ UTILITIES: buttons & links ============ */
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:var(--body);font-weight:600;font-size:15px;
+    letter-spacing:0.01em;
+    padding:14px 28px;
+    border-radius:2px;
+    transition:background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease);
+    white-space:nowrap;
+  }
+  .btn-primary{
+    background:var(--ink);
+    color:var(--cream);
+    border:1px solid var(--ink);
+  }
+  .btn-primary:hover{background:var(--gold-deep);border-color:var(--gold-deep);color:#fff;}
+
+  .btn-outline{
+    background:transparent;
+    color:var(--ink);
+    border:1px solid var(--ink);
+  }
+  .btn-outline:hover{background:var(--ink);color:var(--cream);}
+
+  .btn-ghost-gold{
+    background:transparent;color:var(--gold-deep);border:1px solid var(--gold);
+  }
+  .btn-ghost-gold:hover{background:var(--gold);color:#fff;border-color:var(--gold);}
+
+  .btn .arrow{transition:transform .25s var(--ease);}
+  .btn:hover .arrow{transform:translateX(5px);}
+
+  .link-underline{
+    position:relative;
+    font-weight:600;
+    font-size:15px;
+    padding-bottom:3px;
+    display:inline-block;
+  }
+  .link-underline::after{
+    content:"";
+    position:absolute;left:0;bottom:0;
+    width:100%;height:1px;
+    background:var(--ink);
+    transform:scaleX(1);
+    transform-origin:left;
+  }
+  .link-underline:hover::after{
+    background:var(--gold-deep);
+  }
+  .link-underline .arrow{
+    display:inline-block;
+    margin-left:4px;
+    transition:transform .25s var(--ease);
+  }
+  .link-underline:hover .arrow{transform:translateX(4px);}
+
+  /* ============ IMAGE PLACEHOLDERS ============ */
+  .image-slot{
+    position:relative;
+    background:
+      repeating-linear-gradient(135deg, rgba(28,26,23,0.04) 0 2px, transparent 2px 14px),
+      #E3D9C4;
+    border:1px dashed rgba(28,26,23,0.35);
+    display:flex;align-items:center;justify-content:center;
+    text-align:center;
+    color:var(--ink-soft);
+    font-family:var(--body);
+    font-size:13px;
+    letter-spacing:0.03em;
+    padding:var(--sp-3);
+    overflow:hidden;
+  }
+  .image-slot span{max-width:26ch;}
+  .image-slot-hero{aspect-ratio:4/5;}
+  .image-slot-program{aspect-ratio:4/5;}
+  .image-slot-square{aspect-ratio:1/1;}
+  .image-slot-wide{aspect-ratio:16/9;}
+  @media(min-width:1024px){.image-slot-hero{aspect-ratio:3/4;}}
+
+  /* ============ TOP BAR ============ */
+  .topbar{
+    background:var(--ink);
+    color:var(--cream);
+    font-size:14px;
+    position:relative;
+    z-index:60;
+  }
+  .topbar .wrap{
+    display:flex;align-items:center;justify-content:center;
+    gap:var(--sp-2);
+    padding-top:10px;padding-bottom:10px;
+  }
+  .topbar,
+  .topbar p,
+  .topbar a{color:#FFFFFF;}
+  .topbar .topbar-link::after{background:#FFFFFF;}
+  .topbar .topbar-link:hover::after{background:var(--gold-pale);}
+  .topbar .topbar-link:hover{color:var(--gold-pale);}
+
+  /* ============ NAV ============ */
+  header.site-nav{
+    position:sticky;top:0;z-index:50;
+    background:#FFFFFF;
+    border-bottom:1px solid transparent;
+    transition:border-color .3s var(--ease), box-shadow .3s var(--ease);
+  }
+  header.site-nav.scrolled{
+    border-color:var(--line);
+    box-shadow:0 8px 24px -18px rgba(28,26,23,0.5);
+  }
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    padding-top:var(--sp-2);padding-bottom:var(--sp-2);
+  }
+  .logo{
+    font-family:var(--display);
+    font-size:19px;
+    font-weight:600;
+    letter-spacing:0.02em;
+    text-decoration:none;
+  }
+  .nav-links{
+    display:none;
+    gap:var(--sp-4);
+    align-items:center;
+  }
+  .nav-links a{
+    font-size:14.5px;font-weight:500;
+    text-decoration:none;
+    position:relative;
+    padding:4px 0;
+  }
+  .nav-links a::after{
+    content:"";position:absolute;left:0;bottom:0;height:1px;width:0;
+    background:var(--gold-deep);transition:width .25s var(--ease);
+  }
+  .nav-links a:hover::after{width:100%;}
+  .nav-right{display:flex;align-items:center;gap:var(--sp-3);}
+  .nav-right .btn{display:none;}
+  .menu-toggle{display:flex;flex-direction:column;gap:5px;padding:6px;}
+  .menu-toggle span{width:22px;height:1.5px;background:var(--ink);}
+
+  @media(min-width:900px){
+    .nav-links{display:flex;}
+    .nav-right .btn{display:inline-flex;}
+    .menu-toggle{display:none;}
+  }
+
+  .mobile-panel{
+    display:none;
+    flex-direction:column;
+    gap:var(--sp-2);
+    padding:var(--sp-2) var(--sp-3) var(--sp-4);
+    border-top:1px solid var(--line);
+    background:#FFFFFF;
+  }
+  .mobile-panel.open{display:flex;}
+  .mobile-panel a{font-size:16px;font-weight:500;text-decoration:none;padding:6px 0;}
+  @media(min-width:900px){.mobile-panel{display:none !important;}}
+
+  /* ============ SECTION SCAFFOLDING ============ */
+  section{position:relative;z-index:1;}
+  .section-pad{padding-top:var(--sp-6);padding-bottom:var(--sp-6);}
+  .section-pad-sm{padding-top:var(--sp-5);padding-bottom:var(--sp-5);}
+  .alt-bg{background:var(--cream-alt);}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease), transform .6s var(--ease);}
+  .reveal.is-visible{opacity:1;transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* ============ HERO ============ */
+  .hero{
+    padding-top:var(--sp-6);
+    padding-bottom:var(--sp-6);
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:var(--sp-5);
+    align-items:center;
+  }
+  @media(min-width:900px){
+    .hero-grid{grid-template-columns:1.25fr 1fr;gap:var(--sp-6);}
+  }
+  .hero-copy .eyebrow{color:var(--gold-deep);}
+  .hero h1{
+    font-size:clamp(40px,7vw,74px);
+    max-width:12ch;
+    margin-bottom:var(--sp-3);
+  }
+  .hero h1 em{
+    font-style:italic;
+    font-weight:400;
+    color:var(--gold-deep);
+  }
+  .hero p.lead{
+    font-size:19px;
+    color:var(--ink-soft);
+    max-width:42ch;
+    margin-bottom:var(--sp-4);
+    font-weight:300;
+  }
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:var(--sp-2);}
+  .hero-visual{position:relative;}
+  .hero-visual .image-slot{width:100%;}
+  .hero-visual .frame-note{
+    position:absolute;
+    bottom:-18px;left:-18px;
+    background:var(--ink);
+    color:var(--cream);
+    font-size:12px;
+    letter-spacing:0.05em;
+    padding:8px 14px;
+    display:none;
+  }
+  @media(min-width:900px){.hero-visual .frame-note{display:block;}}
+
+  /* ============ CURTAIN DIVIDER (signature element) ============ */
+  .curtain-divider{
+    height:34px;
+    width:100%;
+    overflow:hidden;
+    line-height:0;
+  }
+  .curtain-divider svg{width:100%;height:100%;display:block;}
+
+  /* ============ RECRUITMENT STEPS ============ */
+  .steps-head{
+    display:flex;flex-direction:column;gap:var(--sp-1);
+    max-width:56ch;
+    margin-bottom:var(--sp-5);
+  }
+  .steps-head h2{font-size:clamp(32px,4.2vw,48px);}
+  .steps-head p{color:var(--ink-soft);font-size:17px;font-weight:300;}
+
+  .steps-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:var(--sp-4);
+  }
+  @media(min-width:800px){
+    .steps-grid{grid-template-columns:repeat(3,1fr);gap:var(--sp-3);}
+  }
+  .step{
+    position:relative;
+    padding-top:var(--sp-3);
+    border-top:1px solid var(--line);
+  }
+  .step .num{
+    font-family:var(--display);
+    font-weight:300;
+    font-size:88px;
+    color:transparent;
+    -webkit-text-stroke:1px rgba(28,26,23,0.28);
+    line-height:1;
+    display:block;
+    margin-bottom:var(--sp-1);
+  }
+  .step h3{font-size:22px;margin-bottom:var(--sp-1);font-weight:600;}
+  .step p{color:var(--ink-soft);font-size:15.5px;}
+
+  .steps-foot{
+    margin-top:var(--sp-5);
+    display:flex;flex-wrap:wrap;
+    align-items:center;
+    gap:var(--sp-3);
+    justify-content:space-between;
+    border-top:1px solid var(--line);
+    padding-top:var(--sp-3);
+  }
+  .steps-foot .meta{font-size:14px;color:var(--ink-soft);letter-spacing:0.01em;}
+
+  /* ============ O NAS ============ */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:var(--sp-5);
+    align-items:center;
+  }
+  @media(min-width:900px){
+    .about-grid{grid-template-columns:0.85fr 1.15fr;gap:var(--sp-6);}
+  }
+  .about-copy h2{font-size:clamp(32px,4.2vw,46px);margin-bottom:var(--sp-3);}
+  .about-copy p.body-text{font-size:17px;color:var(--ink-soft);max-width:52ch;margin-bottom:var(--sp-3);font-weight:300;}
+  .about-list li{
+    display:flex;gap:14px;
+    padding:14px 0;
+    border-bottom:1px solid var(--line-soft);
+    font-size:15.5px;
+  }
+  .about-list li:first-child{border-top:1px solid var(--line-soft);}
+  .about-list .tick{
+    flex:0 0 auto;
+    width:16px;height:1px;background:var(--gold-deep);
+    margin-top:11px;
+  }
+
+  /* ============ PROGRAMY ============ */
+  .programs-head{
+    display:flex;
+    flex-direction:column;
+    gap:var(--sp-1);
+    max-width:60ch;
+    margin-bottom:var(--sp-5);
+  }
+  .programs-head h2{font-size:clamp(32px,4.2vw,48px);}
+  .programs-head p{color:var(--ink-soft);font-size:17px;font-weight:300;}
+
+  .programs-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:var(--sp-4);
+  }
+  @media(min-width:760px){
+    .programs-grid{grid-template-columns:repeat(3,1fr);gap:var(--sp-3);}
+  }
+  .program-card{
+    display:flex;flex-direction:column;
+  }
+  .program-card:nth-child(1) .image-slot,
+  .program-card:nth-child(3) .image-slot{
+    border-radius:0;
+  }
+  .program-card:nth-child(2) .image-slot{
+    border-style:solid;
+    border-color:var(--line);
+  }
+  .program-card .age{
+    font-size:12.5px;font-weight:600;letter-spacing:0.12em;
+    color:var(--gold-deep);
+    margin-top:var(--sp-2);
+  }
+  .program-card h3{font-size:23px;margin-top:6px;margin-bottom:8px;}
+  .program-card p{color:var(--ink-soft);font-size:15px;margin-bottom:var(--sp-2);}
+
+  /* ============ WARSZTATY (scroll-snap gallery) ============ */
+  .workshops-head{
+    display:flex;flex-wrap:wrap;
+    align-items:flex-end;justify-content:space-between;
+    gap:var(--sp-3);
+    margin-bottom:var(--sp-5);
+  }
+  .workshops-head .txt{max-width:60ch;}
+  .workshops-head h2{font-size:clamp(32px,4.2vw,48px);}
+  .workshops-head p{color:var(--ink-soft);font-size:17px;font-weight:300;margin-top:var(--sp-1);}
+
+  .gallery{
+    display:flex;
+    gap:var(--sp-3);
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    padding-bottom:var(--sp-2);
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .gallery::-webkit-scrollbar{display:none;}
+  .gallery-item{
+    flex:0 0 68%;
+    scroll-snap-align:start;
+  }
+  .gallery-item figcaption{
+    margin-top:var(--sp-2);
+    font-size:15px;font-weight:600;
+    display:flex;align-items:center;gap:8px;
+  }
+  .gallery-item figcaption::before{
+    content:"";width:6px;height:6px;background:var(--gold);
+    display:inline-block;
+  }
+  @media(min-width:800px){
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);overflow:visible;gap:var(--sp-3);}
+    .gallery-item{flex:auto;}
+  }
+  @media(min-width:1180px){
+    .gallery{grid-template-columns:repeat(6,1fr);}
+  }
+
+  /* ============ DOKUMENTY ============ */
+  .docs-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:0;
+    border-top:1px solid var(--line);
+  }
+  @media(min-width:700px){
+    .docs-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media(min-width:1024px){
+    .docs-grid{grid-template-columns:repeat(3,1fr);}
+  }
+  .doc-tile{
+    padding:var(--sp-4) var(--sp-3);
+    border-bottom:1px solid var(--line);
+    border-right:1px solid transparent;
+    display:flex;flex-direction:column;
+    gap:var(--sp-2);
+    transition:background .25s var(--ease);
+  }
+  @media(min-width:700px){ .doc-tile{border-right:1px solid var(--line);} }
+  .doc-tile:hover{background:var(--paper);}
+  .doc-tile .file-icon{color:var(--gold-deep);}
+  .doc-tile h3{font-size:19px;font-weight:600;}
+  .doc-tile .tag{font-size:12.5px;color:var(--ink-soft);letter-spacing:0.03em;}
+  .doc-tile .link-underline{margin-top:auto;font-size:14px;}
+
+  /* ============ KONTAKT ============ */
+  .contact-grid{
+    display:grid;grid-template-columns:1fr;
+    gap:var(--sp-5);
+  }
+  @media(min-width:900px){
+    .contact-grid{grid-template-columns:1.1fr 0.9fr;gap:var(--sp-6);}
+  }
+  .contact-head h2{font-size:clamp(32px,4.2vw,46px);margin-bottom:var(--sp-3);}
+  .field{margin-bottom:var(--sp-3);}
+  .field label{
+    display:block;font-size:13px;font-weight:600;letter-spacing:0.05em;
+    text-transform:uppercase;color:var(--ink-soft);margin-bottom:8px;
+  }
+  .field input,.field textarea{
+    width:100%;
+    border:none;
+    border-bottom:1px solid var(--line);
+    background:transparent;
+    font-family:var(--body);
+    font-size:16px;
+    padding:10px 2px;
+    color:var(--ink);
+    transition:border-color .25s var(--ease);
+  }
+  .field input:focus,.field textarea:focus{border-color:var(--gold-deep);outline:none;}
+  .field textarea{resize:vertical;min-height:110px;}
+
+  .contact-side .image-slot{margin-bottom:var(--sp-4);}
+  .contact-info li{
+    display:flex;flex-direction:column;gap:2px;
+    padding:14px 0;
+    border-top:1px solid var(--line-soft);
+    font-size:15.5px;
+  }
+  .contact-info li:last-child{border-bottom:1px solid var(--line-soft);}
+  .contact-info .label{font-size:12px;letter-spacing:0.1em;color:var(--gold-deep);font-weight:600;}
+
+  /* ============ FOOTER ============ */
+  footer{
+    background:var(--ink);
+    color:var(--cream);
+    padding-top:var(--sp-6);
+    padding-bottom:var(--sp-4);
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:var(--sp-4);
+    padding-bottom:var(--sp-5);
+    border-bottom:1px solid rgba(241,234,221,0.15);
+  }
+  @media(min-width:700px){ .footer-grid{grid-template-columns:repeat(4,1fr);} }
+  .footer-grid h4{
+    font-family:var(--body);
+    font-size:12.5px;letter-spacing:0.1em;text-transform:uppercase;
+    color:var(--gold-pale);margin-bottom:var(--sp-2);font-weight:600;
+  }
+  .footer-grid li{margin-bottom:10px;}
+  .footer-grid a{
+    font-size:14.5px;text-decoration:none;color:rgba(241,234,221,0.85);
+  }
+  .footer-grid a:hover{color:var(--gold-pale);}
+  .footer-bottom{
+    padding-top:var(--sp-3);
+    display:flex;flex-wrap:wrap;
+    justify-content:space-between;
+    align-items:center;
+    gap:var(--sp-2);
+  }
+  .footer-bottom .logo{color:var(--cream);}
+  .footer-bottom p{font-size:13px;color:rgba(241,234,221,0.6);}
+
+  /* ============ SR-ONLY ============ */
+  .sr-only{
+    position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+    overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ TOP BAR ============ -->
+<div class="topbar">
+  <div class="wrap">
+    <p>Zapisy na sezon 2026/2027 trwają — dołącz do castingu</p>
+    <a href="#zapisy" class="link-underline topbar-link">Zapisz się</a>
+  </div>
+</div>
+
+<!-- ============ NAV ============ -->
+<header class="site-nav" id="siteNav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="logo">AKADEMIA MUSICALOWA</a>
+    <nav class="nav-links" aria-label="Nawigacja główna">
+      <a href="#rekrutacja">Rekrutacja</a>
+      <a href="#o-nas">O nas</a>
+      <a href="#programy">Programy</a>
+      <a href="#warsztaty">Warsztaty</a>
+      <a href="#dokumenty">Dokumenty</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <div class="nav-right">
+      <a href="#rekrutacja" class="btn btn-primary">Zapisz się</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Otwórz menu" aria-expanded="false" aria-controls="mobilePanel">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="#rekrutacja">Rekrutacja</a>
+    <a href="#o-nas">O nas</a>
+    <a href="#programy">Programy</a>
+    <a href="#warsztaty">Warsztaty</a>
+    <a href="#dokumenty">Dokumenty</a>
+    <a href="#kontakt">Kontakt</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy reveal">
+        <span class="eyebrow">Akademia Musicalowa</span>
+        <h1>Odkryj <em>scenę</em> w sobie</h1>
+        <p class="lead">Akademia śpiewu, tańca i aktorstwa musicalowego dla dzieci i młodzieży.</p>
+        <div class="hero-ctas">
+          <a href="#rekrutacja" class="btn btn-primary">Zapisz się na casting <span class="arrow">→</span></a>
+          <a href="#programy" class="btn btn-outline">Zobacz programy</a>
+        </div>
+      </div>
+      <div class="hero-visual reveal">
+        <div class="image-slot image-slot-hero image-slot-hero-el">
+          <span>[ZDJĘCIE: uczniowie na scenie, hero]</span>
+        </div>
+        <div class="frame-note">SEZON 2026 / 2027</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="curtain-divider" aria-hidden="true">
+    <svg viewBox="0 0 1200 34" preserveAspectRatio="none">
+      <defs>
+        <pattern id="fold" width="24" height="34" patternUnits="userSpaceOnUse">
+          <path d="M0 0 Q12 17 0 34" fill="none" stroke="#1C1A17" stroke-opacity="0.12" stroke-width="1"/>
+          <path d="M24 0 Q12 17 24 34" fill="none" stroke="#1C1A17" stroke-opacity="0.12" stroke-width="1"/>
+        </pattern>
+      </defs>
+      <rect width="1200" height="34" fill="url(#fold)"/>
+    </svg>
+  </div>
+
+  <!-- ============ REKRUTACJA ============ -->
+  <section class="section-pad" id="rekrutacja">
+    <div class="wrap">
+      <div class="steps-head reveal">
+        <span class="eyebrow">Rekrutacja 2026/2027</span>
+        <h2>Trzy proste kroki</h2>
+        <p>Trzy proste kroki dzielą Cię od pierwszej próby. Dołącz do naszej sceny.</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step reveal">
+          <span class="num">01</span>
+          <h3>Formularz zgłoszeniowy</h3>
+          <p>Wypełnij online formularz — podstawowe dane, wiek i wybrany program. Zajmie Ci to 5 minut.</p>
+        </div>
+        <div class="step reveal">
+          <span class="num">02</span>
+          <h3>Casting</h3>
+          <p>Zaprezentuj utwór wokalny lub monolog. Bez presji — patrzymy na potencjał, nie na perfekcję.</p>
+        </div>
+        <div class="step reveal">
+          <span class="num">03</span>
+          <h3>Rozmowa kwalifikacyjna</h3>
+          <p>Krótka rozmowa z opiekunem programu — poznajemy Cię i Twoje ambicje. Decyzja w 7 dni.</p>
+        </div>
+      </div>
+
+      <div class="steps-foot reveal">
+        <p class="meta">Castingi: 12–26 września 2026 · zajęcia startują 5 października</p>
+        <a href="#kontakt" class="link-underline">Wypełnij formularz <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ O NAS ============ -->
+  <section class="section-pad alt-bg" id="o-nas">
+    <div class="wrap about-grid">
+      <div class="image-slot image-slot-hero reveal image-slot-about">
+        <span>[ZDJĘCIE: próba teatralna, uczniowie na scenie]</span>
+      </div>
+      <div class="about-copy reveal">
+        <span class="eyebrow">O nas</span>
+        <h2>Kim jesteśmy</h2>
+        <p class="body-text">Jesteśmy Akademią Musicalową założoną przez zespół pedagogów, reżyserów i choreografów z doświadczeniem w największych polskich scenach. Uczymy odwagi, dyscypliny i radości scenicznej — bez wyścigu, bez oceniania.</p>
+        <ul class="about-list">
+          <li><span class="tick" aria-hidden="true"></span>Ponad 300 absolwentów na scenach zawodowych</li>
+          <li><span class="tick" aria-hidden="true"></span>Zajęcia w kameralnych grupach do 12 osób</li>
+          <li><span class="tick" aria-hidden="true"></span>Pedagodzy z Teatru Roma, Muzycznego i Studia Buffo</li>
+          <li><span class="tick" aria-hidden="true"></span>Coroczne spektakle dyplomowe w profesjonalnym teatrze</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROGRAMY ============ -->
+  <section class="section-pad" id="programy">
+    <div class="wrap">
+      <div class="programs-head reveal">
+        <span class="eyebrow">Programy</span>
+        <h2>Nasze programy</h2>
+        <p>Trzy ścieżki dopasowane do wieku i doświadczenia — od pierwszych scen po przygotowanie do zawodu.</p>
+      </div>
+
+      <div class="programs-grid">
+        <article class="program-card reveal">
+          <div class="image-slot image-slot-program">
+            <span>[ZDJĘCIE: Musical Junior, zajęcia grupowe]</span>
+          </div>
+          <span class="age">6–10 LAT</span>
+          <h3>Musical Junior</h3>
+          <p>Zabawa sceniczna, śpiew grupowy, ruch przy muzyce.</p>
+          <a href="#kontakt" class="link-underline">Dowiedz się więcej <span class="arrow">→</span></a>
+        </article>
+
+        <article class="program-card reveal">
+          <div class="image-slot image-slot-program">
+            <span>[ZDJĘCIE: Musical Teen, warsztat wokalny]</span>
+          </div>
+          <span class="age">11–15 LAT</span>
+          <h3>Musical Teen</h3>
+          <p>Technika wokalna, taniec jazzowy, praca z tekstem.</p>
+          <a href="#kontakt" class="link-underline">Dowiedz się więcej <span class="arrow">→</span></a>
+        </article>
+
+        <article class="program-card reveal">
+          <div class="image-slot image-slot-program">
+            <span>[ZDJĘCIE: Musical Pro, próba na scenie]</span>
+          </div>
+          <span class="age">16+ LAT</span>
+          <h3>Musical Pro</h3>
+          <p>Przygotowanie do egzaminów aktorskich i castingów.</p>
+          <a href="#kontakt" class="link-underline">Dowiedz się więcej <span class="arrow">→</span></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WARSZTATY ============ -->
+  <section class="section-pad alt-bg" id="warsztaty">
+    <div class="wrap">
+      <div class="workshops-head reveal">
+        <div class="txt">
+          <span class="eyebrow">Warsztaty</span>
+          <h2>Warsztaty specjalistyczne</h2>
+          <p>Krótkie, intensywne bloki tematyczne prowadzone przez zaproszonych artystów. Otwarte także dla osób spoza akademii.</p>
+        </div>
+        <a href="#kontakt" class="btn btn-ghost-gold">Zobacz kalendarz</a>
+      </div>
+
+      <div class="gallery reveal">
+        <figure class="gallery-item">
+          <div class="image-slot image-slot-square"><span>[ZDJĘCIE: warsztat wokalny]</span></div>
+          <figcaption>Wokal</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <div class="image-slot image-slot-square"><span>[ZDJĘCIE: warsztat taneczny]</span></div>
+          <figcaption>Taniec</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <div class="image-slot image-slot-square"><span>[ZDJĘCIE: warsztat aktorski]</span></div>
+          <figcaption>Aktorstwo</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <div class="image-slot image-slot-square"><span>[ZDJĘCIE: ruch sceniczny]</span></div>
+          <figcaption>Ruch sceniczny</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <div class="image-slot image-slot-square"><span>[ZDJĘCIE: charakteryzacja]</span></div>
+          <figcaption>Charakteryzacja</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <div class="image-slot image-slot-square"><span>[ZDJĘCIE: zespół, ensemble]</span></div>
+          <figcaption>Ensemble</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DOKUMENTY ============ -->
+  <section class="section-pad" id="dokumenty">
+    <div class="wrap">
+      <div class="programs-head reveal">
+        <h2>Dokumenty do pobrania</h2>
+        <p>Wszystko czego potrzebujesz na start — regulamin, formularze i harmonogramy.</p>
+      </div>
+
+      <div class="docs-grid reveal">
+        <div class="doc-tile">
+          <svg class="file-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 2h9l5 5v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M15 2v5h5"/></svg>
+          <h3>Regulamin akademii</h3>
+          <span class="tag">PDF · aktualizacja lipiec 2026</span>
+          <a href="#" class="link-underline">Pobierz PDF <span class="arrow">→</span></a>
+        </div>
+        <div class="doc-tile">
+          <svg class="file-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 2h9l5 5v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M15 2v5h5"/></svg>
+          <h3>Formularz zgłoszeniowy</h3>
+          <span class="tag">PDF · aktualizacja lipiec 2026</span>
+          <a href="#" class="link-underline">Pobierz PDF <span class="arrow">→</span></a>
+        </div>
+        <div class="doc-tile">
+          <svg class="file-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 2h9l5 5v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M15 2v5h5"/></svg>
+          <h3>Zgoda RODO</h3>
+          <span class="tag">PDF · aktualizacja lipiec 2026</span>
+          <a href="#" class="link-underline">Pobierz PDF <span class="arrow">→</span></a>
+        </div>
+        <div class="doc-tile">
+          <svg class="file-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 2h9l5 5v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M15 2v5h5"/></svg>
+          <h3>Harmonogram zajęć 2026/2027</h3>
+          <span class="tag">PDF · aktualizacja lipiec 2026</span>
+          <a href="#" class="link-underline">Pobierz PDF <span class="arrow">→</span></a>
+        </div>
+        <div class="doc-tile">
+          <svg class="file-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 2h9l5 5v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M15 2v5h5"/></svg>
+          <h3>Cennik</h3>
+          <span class="tag">PDF · aktualizacja lipiec 2026</span>
+          <a href="#" class="link-underline">Pobierz PDF <span class="arrow">→</span></a>
+        </div>
+        <div class="doc-tile">
+          <svg class="file-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 2h9l5 5v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M15 2v5h5"/></svg>
+          <h3>Kodeks etyki</h3>
+          <span class="tag">PDF · aktualizacja lipiec 2026</span>
+          <a href="#" class="link-underline">Pobierz PDF <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ KONTAKT ============ -->
+  <section class="section-pad alt-bg" id="kontakt">
+    <div class="wrap contact-grid">
+      <div class="contact-form reveal">
+        <div class="contact-head">
+          <span class="eyebrow">Kontakt</span>
+          <h2>Wyślij wiadomość</h2>
+        </div>
+        <form onsubmit="event.preventDefault(); alert('Dziękujemy za wiadomość — odezwiemy się wkrótce.');">
+          <div class="field">
+            <label for="name">Imię i nazwisko</label>
+            <input id="name" name="name" type="text" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" required autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="phone">Telefon</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel">
+          </div>
+          <div class="field">
+            <label for="message">Wiadomość</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Wyślij wiadomość <span class="arrow">→</span></button>
+        </form>
+      </div>
+
+      <div class="contact-side reveal">
+        <div class="image-slot image-slot-wide image-slot-about">
+          <span>[ZDJĘCIE: siedziba akademii, wejście]</span>
+        </div>
+        <ul class="contact-info">
+          <li><span class="label">Adres</span>ul. Sceniczna 12, 00-001 Warszawa</li>
+          <li><span class="label">Telefon</span>+48 22 000 00 00</li>
+          <li><span class="label">E-mail</span>kontakt@akademiamusicalowa.pl</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>O akademii</h4>
+        <ul>
+          <li><a href="#o-nas">Kim jesteśmy</a></li>
+          <li><a href="#">Zespół</a></li>
+          <li><a href="#">Kariera</a></li>
+          <li><a href="#">Prasa</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Programy</h4>
+        <ul>
+          <li><a href="#programy">Musical Junior</a></li>
+          <li><a href="#programy">Musical Teen</a></li>
+          <li><a href="#programy">Musical Pro</a></li>
+          <li><a href="#warsztaty">Warsztaty</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Dokumenty</h4>
+        <ul>
+          <li><a href="#dokumenty">Regulamin</a></li>
+          <li><a href="#dokumenty">RODO</a></li>
+          <li><a href="#dokumenty">Cennik</a></li>
+          <li><a href="#dokumenty">Harmonogram</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Social media</h4>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">YouTube</a></li>
+          <li><a href="#">TikTok</a></li>
+          <li><a href="#">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="logo">AKADEMIA MUSICALOWA</span>
+      <p>© 2026 Akademia Musicalowa. Wszystkie prawa zastrzeżone.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // sticky header shadow after scroll
+  const nav = document.getElementById('siteNav');
+  const onScroll = () => {
+    if(window.scrollY > 12){ nav.classList.add('scrolled'); }
+    else { nav.classList.remove('scrolled'); }
+  };
+  document.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  // mobile menu toggle
+  const toggle = document.getElementById('menuToggle');
+  const panel = document.getElementById('mobilePanel');
+  toggle.addEventListener('click', () => {
+    const open = panel.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    panel.classList.remove('open');
+    toggle.setAttribute('aria-expanded','false');
+  }));
+
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('is-visible'));
+  }
+</script>
+
+</body>
+</html>
