@@ -398,7 +398,6 @@
   }
   .programs-head h2{font-size:clamp(32px,4.2vw,48px);}
   .programs-head p{color:var(--ink-soft);font-size:17px;font-weight:300;}
-
   .programs-grid{
     display:grid;
     grid-template-columns:1fr;
@@ -426,6 +425,56 @@
   .program-card h3{font-size:23px;margin-top:6px;margin-bottom:8px;}
   .program-card p{color:var(--ink-soft);font-size:15px;margin-bottom:var(--sp-2);}
 
+  /* ---- Nowe karty (Stage Adults / Stage LVL UP) ---- */
+  .program-card-new{
+    position:relative;
+    background:var(--navy,#152238);
+    border-radius:20px;
+    padding:var(--sp-3);
+    padding-top:calc(var(--sp-3) + 10px);
+  }
+  .program-card-new .image-slot{
+    border:none;
+    background:transparent;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .program-card-new .image-slot img{
+    filter:brightness(0) invert(1);
+    opacity:0.9;
+  }
+  .program-card-new .age{
+    color:var(--gold,#d8952f);
+  }
+  .program-card-new h3{
+    color:#fff;
+  }
+  .program-card-new p{
+    color:rgba(255,255,255,0.75);
+  }
+  .program-card-new a{
+    color:#fff;
+  }
+  .program-card-new a .arrow{
+    color:var(--gold,#d8952f);
+  }
+
+  .badge-new{
+    position:absolute;
+    top:-14px;
+    left:24px;
+    background:var(--gold,#d8952f);
+    color:var(--navy,#152238);
+    font-size:12.5px;
+    font-weight:700;
+    letter-spacing:0.06em;
+    padding:5px 16px;
+    border-radius:999px;
+    transform:rotate(-3deg);
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
+  }
+  
   /* ============ WARSZTATY (scroll-snap gallery) ============ */
   .workshops-head{
     display:flex;flex-wrap:wrap;
@@ -818,38 +867,55 @@
     <div class="wrap">
       <div class="programs-head reveal">
         <span class="eyebrow">Programy</span>
-        <h2>Nasze programy</h2>
-        <p>Trzy ścieżki dopasowane do wieku i doświadczenia — od pierwszych scen po przygotowanie do zawodu.</p>
+        <h2>Nasze grupy</h2>
+        <p>Pięć ścieżek dopasowanych do wieku i doświadczenia — od pierwszych scen po spełnianie dziecięcych marzeń w dorosłości.</p>
       </div>
-
       <div class="programs-grid">
+        <article class="program-card reveal">
+          <div class="image-slot image-slot-program">
+              <img src="https://raw.githubusercontent.com/piotrturowski7/akademia-stageup/refs/heads/main/img/kids-v.webp" alt="Dzieci na scenie">
+          </div>
+          <span class="age">6–8 LAT</span>
+          <h3>Stage Kids</h3>
+          <p>Wprowadzamy do musicalu poprzez zabawę.</p>
+          <a href="#kontakt" class="link-underline">Dowiedz się więcej <span class="arrow">→</span></a>
+        </article>
         <article class="program-card reveal">
           <div class="image-slot image-slot-program">
               <img src="https://raw.githubusercontent.com/piotrturowski7/akademia-stageup/refs/heads/main/img/junior-v.webp" alt="Juniorzy na scenie">
           </div>
-          <span class="age">6–10 LAT</span>
-          <h3>Musical Junior</h3>
-          <p>Zabawa sceniczna, śpiew grupowy, ruch przy muzyce.</p>
+          <span class="age">9–12 LAT</span>
+          <h3>Stage Juniors</h3>
+          <p>Rozwijamy wokal, taniec i aktorstwo — budujemy solidne fundamenty.</p>
           <a href="#kontakt" class="link-underline">Dowiedz się więcej <span class="arrow">→</span></a>
         </article>
-
         <article class="program-card reveal">
           <div class="image-slot image-slot-program">
               <img src="https://raw.githubusercontent.com/piotrturowski7/akademia-stageup/refs/heads/main/img/teen-v.webp" alt="Nastolatkowie na scenie">
           </div>
-          <span class="age">11–15 LAT</span>
-          <h3>Musical Teen</h3>
-          <p>Technika wokalna, taniec jazzowy, praca z tekstem.</p>
+          <span class="age">13–18 LAT</span>
+          <h3>Stage Teens</h3>
+          <p>Pasja, rozwój i przygotowanie do występów na scenie.</p>
           <a href="#kontakt" class="link-underline">Dowiedz się więcej <span class="arrow">→</span></a>
         </article>
-
-        <article class="program-card reveal">
+        <article class="program-card program-card-new reveal">
+          <span class="badge-new">NOWOŚĆ!</span>
           <div class="image-slot image-slot-program">
-              <img src="https://raw.githubusercontent.com/piotrturowski7/akademia-stageup/refs/heads/main/img/pro-v.webp" alt="Dorośli na scenie">
+              <img src="https://raw.githubusercontent.com/piotrturowski7/akademia-stageup/refs/heads/main/img/adults-v.webp" alt="Dorośli na scenie">
           </div>
-          <span class="age">16+ LAT</span>
-          <h3>Musical Pro</h3>
-          <p>Przygotowanie do egzaminów aktorskich i castingów.</p>
+          <span class="age">25+ LAT</span>
+          <h3>Stage Adults</h3>
+          <p>Musical od podstaw dla dorosłych — dla przyjemności i spełnienia swoich dziecięcych marzeń!</p>
+          <a href="#kontakt" class="link-underline">Dowiedz się więcej <span class="arrow">→</span></a>
+        </article>
+        <article class="program-card program-card-new reveal">
+          <span class="badge-new">NOWOŚĆ!</span>
+          <div class="image-slot image-slot-program">
+              <img src="https://raw.githubusercontent.com/piotrturowski7/akademia-stageup/refs/heads/main/img/lvlup-v.webp" alt="Grupa pokazowa Stage LVL UP">
+          </div>
+          <span class="age">GRUPA POKAZOWA</span>
+          <h3>Stage LVL UP</h3>
+          <p>Rekrutacja podczas castingu już 28 sierpnia 2026!</p>
           <a href="#kontakt" class="link-underline">Dowiedz się więcej <span class="arrow">→</span></a>
         </article>
       </div>
