@@ -77,24 +77,27 @@
   }
 
   /* ============ UTILITIES: buttons & links ============ */
-  .btn{
+    .btn{
     display:inline-flex;align-items:center;gap:10px;
     font-family:var(--body);font-weight:600;font-size:15px;
     letter-spacing:0.01em;
     padding:14px 28px;
     border-radius:2px;
-    border:1px solid #fff
+    border:1px solid #fff;
     transition:background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease);
     white-space:nowrap;
     text-decoration:none;
   }
   .btn-primary{
     background:#193C65;
-    color:var(--cream);
+    color:#fff;
     border:1px solid #fff;
-    
   }
-  .btn-primary:hover{background:var(--gold-deep);border-color:var(--gold-deep);color:#fff;}
+  .btn-primary:hover{
+    background:#fff;
+    color:#193C65;
+    border-color:#193C65;
+  }
 
   .btn-outline{
     background:transparent;
