@@ -141,6 +141,18 @@
     padding:var(--sp-3);
     overflow:hidden;
   }
+  .image-slot:has(img){
+  background:none;
+  border:none;
+  padding:0;
+}
+
+.image-slot img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
   .image-slot span{max-width:26ch;}
   .image-slot-hero{aspect-ratio:4/5;}
   .image-slot-program{aspect-ratio:4/5;}
@@ -649,6 +661,7 @@
   <!-- ============ O NAS ============ -->
   <section class="section-pad alt-bg" id="o-nas">
     <div class="wrap about-grid">
+      <div class="image-slot image-slot-hero reveal image-slot-about">
   <img src="https://raw.githubusercontent.com/piotrturowski7/akademia-stageup/refs/heads/main/img/o-nas.webp" alt="Próba teatralna, uczniowie na scenie">
 </div>
       <div class="about-copy reveal">
