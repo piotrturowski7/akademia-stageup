@@ -534,6 +534,130 @@
   .contact-info li:last-child{border-bottom:1px solid var(--line-soft);}
   .contact-info .label{font-size:12px;letter-spacing:0.1em;color:var(--gold-deep);font-weight:600;}
 
+   /* ============ FAQ ============ */
+  .faq-head{
+    display:flex;flex-direction:column;gap:var(--sp-1);
+    max-width:60ch;
+    margin-bottom:var(--sp-5);
+  }
+  .faq-head h2{font-size:clamp(32px,4.2vw,48px);}
+  .faq-head p{color:var(--ink-soft);font-size:17px;font-weight:300;}
+ 
+  .faq-list{
+    border-top:1px solid var(--line);
+    max-width:920px;
+  }
+ 
+  .faq-item{
+    border-bottom:1px solid var(--line);
+  }
+ 
+  /* reset domyślnego wyglądu <details>/<summary> */
+  .faq-item summary{
+    list-style:none;
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+ 
+  .faq-question{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:var(--sp-3);
+    padding:var(--sp-3) 2px;
+  }
+  .faq-question .num{
+    font-family:var(--display);
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:0.08em;
+    color:var(--gold-deep);
+    flex:0 0 auto;
+    width:28px;
+  }
+  .faq-question h3{
+    flex:1;
+    font-size:18px;
+    font-weight:600;
+    letter-spacing:-0.005em;
+    transition:color .25s var(--ease);
+  }
+  .faq-item:hover .faq-question h3{color:var(--gold-deep);}
+ 
+  .faq-toggle{
+    flex:0 0 auto;
+    position:relative;
+    width:20px;height:20px;
+  }
+  .faq-toggle::before,
+  .faq-toggle::after{
+    content:"";
+    position:absolute;
+    top:50%;left:50%;
+    background:var(--ink);
+    transition:transform .3s var(--ease), background .25s var(--ease);
+  }
+  .faq-toggle::before{
+    width:14px;height:1px;
+    transform:translate(-50%,-50%);
+  }
+  .faq-toggle::after{
+    width:1px;height:14px;
+    transform:translate(-50%,-50%);
+  }
+  .faq-item[open] .faq-toggle::before,
+  .faq-item[open] .faq-toggle::after{
+    background:var(--gold-deep);
+  }
+  .faq-item[open] .faq-toggle::after{
+    transform:translate(-50%,-50%) rotate(90deg) scale(0);
+  }
+  .faq-item[open] .faq-toggle::before{
+    transform:translate(-50%,-50%) rotate(180deg);
+  }
+ 
+  .faq-answer-wrap{
+    overflow:hidden;
+  }
+  .faq-answer{
+    padding:0 2px var(--sp-3) 38px;
+    color:var(--ink-soft);
+    font-size:15.5px;
+    font-weight:300;
+    max-width:62ch;
+  }
+  .faq-answer p + p{margin-top:10px;}
+  .faq-answer ul{margin-top:8px;}
+  .faq-answer li{
+    position:relative;
+    padding-left:16px;
+    margin-bottom:6px;
+  }
+  .faq-answer li::before{
+    content:"";
+    position:absolute;left:0;top:9px;
+    width:6px;height:1px;
+    background:var(--gold-deep);
+  }
+ 
+  /* animacja rozwijania treści (progressive enhancement, JS niżej) */
+  .faq-item .faq-answer-wrap{
+    display:grid;
+    grid-template-rows:0fr;
+    transition:grid-template-rows .35s var(--ease);
+  }
+  .faq-item .faq-answer-wrap > div{overflow:hidden;}
+  .faq-item[open] .faq-answer-wrap{grid-template-rows:1fr;}
+ 
+  .faq-foot{
+    margin-top:var(--sp-4);
+    display:flex;flex-wrap:wrap;
+    align-items:center;justify-content:space-between;
+    gap:var(--sp-3);
+  }
+  .faq-foot p{color:var(--ink-soft);font-size:15px;}
+  
   /* ============ FOOTER ============ */
   footer{
     background:var(--ink);
@@ -864,8 +988,204 @@
     </div>
   </section>
 
+<!-- ============ FAQ ============ -->
+<section class="section-pad" id="faq">
+  <div class="wrap">
+ 
+    <div class="faq-head reveal">
+      <span class="eyebrow">Pytania i odpowiedzi</span>
+      <h2>Najczęściej zadawane <em>pytania</em></h2>
+      <p>Wszystko, co warto wiedzieć przed dołączeniem do Akademii Musicalowej Stage Up — o grupach wiekowych, rekrutacji, harmonogramie i opłatach.</p>
+    </div>
+ 
+    <div class="faq-list reveal">
+ 
+      <details class="faq-item" name="faq">
+        <summary>
+          <div class="faq-question">
+            <span class="num">01</span>
+            <h3>Dla kogo jest Akademia Musicalowa Stage Up?</h3>
+            <span class="faq-toggle"></span>
+          </div>
+        </summary>
+        <div class="faq-answer-wrap"><div>
+          <div class="faq-answer">
+            <p>Akademia Musicalowa Stage Up jest skierowana do dzieci, młodzieży i dorosłych. Pracujemy w czterech grupach wiekowych:</p>
+            <ul>
+              <li>Stage Kids (6–8 lat)</li>
+              <li>Stage Juniors (9–12 lat)</li>
+              <li>Stage Teens (13–17 lat)</li>
+            </ul>
+          </div>
+        </div></div>
+      </details>
+ 
+      <details class="faq-item" name="faq">
+        <summary>
+          <div class="faq-question">
+            <span class="num">02</span>
+            <h3>Czy trzeba mieć wcześniejsze doświadczenie?</h3>
+            <span class="faq-toggle"></span>
+          </div>
+        </summary>
+        <div class="faq-answer-wrap"><div>
+          <div class="faq-answer">
+            <p>Nie. Nasze zajęcia są otwarte zarówno dla początkujących, jak i dla tych, którzy mają już doświadczenie w śpiewie, tańcu lub aktorstwie.</p>
+            <p>Nie wymagamy profesjonalnych umiejętności – wystarczy otwartość, podstawowe poczucie rytmu i chęć do pracy w grupie. Reszty uczymy krok po kroku, w atmosferze zabawy i wspólnej pasji do musicalu.</p>
+          </div>
+        </div></div>
+      </details>
+ 
+      <details class="faq-item" name="faq">
+        <summary>
+          <div class="faq-question">
+            <span class="num">03</span>
+            <h3>Ile kosztują zajęcia?</h3>
+            <span class="faq-toggle"></span>
+          </div>
+        </summary>
+        <div class="faq-answer-wrap"><div>
+          <div class="faq-answer">
+            <p>Czesne wynosi 300 zł miesięcznie dla każdej grupy. Płatność obejmuje cotygodniowe zajęcia z trzech dziedzin musicalu: taniec, śpiew oraz aktorstwo.</p>
+          </div>
+        </div></div>
+      </details>
+ 
+      <details class="faq-item" name="faq">
+        <summary>
+          <div class="faq-question">
+            <span class="num">04</span>
+            <h3>Jak wygląda proces rekrutacji do Akademii?</h3>
+            <span class="faq-toggle"></span>
+          </div>
+        </summary>
+        <div class="faq-answer-wrap"><div>
+          <div class="faq-answer">
+            <p>Przed dołączeniem do Akademii zapraszamy kandydatów na lekcję pokazową. To doskonała okazja, by dzieci i młodzież mogły poczuć atmosferę zajęć, a rodzice zobaczyć, jak wygląda nasza praca „od środka".</p>
+            <p>Podczas lekcji instruktorzy z życzliwością obserwują uczestników, zwracając uwagę na ich indywidualne predyspozycje – takie jak poczucie rytmu, wrażliwość sceniczna, otwartość czy zaangażowanie w pracę zespołową.</p>
+            <p>To spotkanie ma charakter zapoznawczy – pozwala zarówno dziecku, jak i rodzicowi sprawdzić, czy Akademia Musicalowa Stage Up to odpowiednie miejsce do dalszego rozwoju pasji i talentów.</p>
+          </div>
+        </div></div>
+      </details>
+ 
+      <details class="faq-item" name="faq">
+        <summary>
+          <div class="faq-question">
+            <span class="num">05</span>
+            <h3>Jak wygląda harmonogram zajęć?</h3>
+            <span class="faq-toggle"></span>
+          </div>
+        </summary>
+        <div class="faq-answer-wrap"><div>
+          <div class="faq-answer">
+            <p>Każda grupa uczestniczy w zajęciach dwa razy w tygodniu, w podziale na:</p>
+            <ul>
+              <li>jeden dzień: zajęcia wokalne i taneczne,</li>
+              <li>drugi dzień: zajęcia teatralne.</li>
+            </ul>
+            <p>Dzięki temu dzieci i młodzież mogą rozwijać się równolegle w trzech kluczowych dziedzinach musicalu, w komfortowym, nieprzeciążającym rytmie.</p>
+          </div>
+        </div></div>
+      </details>
+ 
+      <details class="faq-item" name="faq">
+        <summary>
+          <div class="faq-question">
+            <span class="num">06</span>
+            <h3>Ile trwają zajęcia?</h3>
+            <span class="faq-toggle"></span>
+          </div>
+        </summary>
+        <div class="faq-answer-wrap"><div>
+          <div class="faq-answer">
+            <p>Czas trwania lekcji zależy od grupy wiekowej:</p>
+            <ul>
+              <li>Stage Kids (6–9 lat) – każde zajęcia trwają 45 minut, co pozwala maksymalnie wykorzystać koncentrację i energię młodszych uczestników,</li>
+              <li>Stage Juniors (10–13 lat) i Stage Teens (14–17 lat) – każde zajęcia trwają 60 minut, co daje więcej czasu na rozwijanie umiejętności i kreatywności.</li>
+            </ul>
+          </div>
+        </div></div>
+      </details>
+ 
+      <details class="faq-item" name="faq">
+        <summary>
+          <div class="faq-question">
+            <span class="num">07</span>
+            <h3>Gdzie odbywają się zajęcia?</h3>
+            <span class="faq-toggle"></span>
+          </div>
+        </summary>
+        <div class="faq-answer-wrap"><div>
+          <div class="faq-answer">
+            <p>Zajęcia odbywają się w dwóch lokalizacjach w Głogowie:</p>
+            <ul>
+              <li>zajęcia teatralne prowadzone są w Sali Widowiskowej MOK,</li>
+              <li>zajęcia wokalne i taneczne odbywają się w Szkole Podstawowej nr 8.</li>
+            </ul>
+          </div>
+        </div></div>
+      </details>
+ 
+      <details class="faq-item" name="faq">
+        <summary>
+          <div class="faq-question">
+            <span class="num">08</span>
+            <h3>Czy na koniec roku jest pokaz lub spektakl?</h3>
+            <span class="faq-toggle"></span>
+          </div>
+        </summary>
+        <div class="faq-answer-wrap"><div>
+          <div class="faq-answer">
+            <p>Tak! Akademia organizuje spektakl podsumowujący sezon, w którym bierze udział każdy uczeń. To wyjątkowa okazja, by zaprezentować swoje umiejętności w tańcu, śpiewie i grze aktorskiej przed publicznością oraz najbliższymi.</p>
+          </div>
+        </div></div>
+      </details>
+ 
+      <details class="faq-item" name="faq">
+        <summary>
+          <div class="faq-question">
+            <span class="num">09</span>
+            <h3>Czy poza regularnymi zajęciami są organizowane dodatkowe warsztaty?</h3>
+            <span class="faq-toggle"></span>
+          </div>
+        </summary>
+        <div class="faq-answer-wrap"><div>
+          <div class="faq-answer">
+            <p>Tak! Średnio raz w miesiącu organizujemy dodatkowe warsztaty tematyczne, które odbywają się w weekendy. Każdego miesiąca skupiamy się na innej dziedzinie – tańcu, śpiewie lub teatrze.</p>
+            <p>Zajęcia prowadzą zaproszeni goście – doświadczeni instruktorzy specjalizujący się w danej dziedzinie. To doskonała okazja dla dzieci, aby poszerzyć swoje horyzonty i zdobyć nowe, cenne doświadczenia.</p>
+          </div>
+        </div></div>
+      </details>
+ 
+      <details class="faq-item" name="faq">
+        <summary>
+          <div class="faq-question">
+            <span class="num">10</span>
+            <h3>Jak długo trwa sezon zajęć?</h3>
+            <span class="faq-toggle"></span>
+          </div>
+        </summary>
+        <div class="faq-answer-wrap"><div>
+          <div class="faq-answer">
+            <p>Sezon zajęć trwa od września 2025 do czerwca 2026 i jest podzielony na dwa semestry:</p>
+            <ul>
+              <li>pierwszy semestr: wrzesień 2025 – styczeń 2026,</li>
+              <li>drugi semestr: luty – czerwiec 2026.</li>
+            </ul>
+          </div>
+        </div></div>
+      </details>
+ 
+    </div>
+ 
+    <div class="faq-foot reveal">
+      <p>Nie znalazłeś odpowiedzi na swoje pytanie?</p>
+      <a href="#kontakt" class="link-underline">Napisz do nas <span class="arrow">→</span></a>
+    </div>
+ 
+  </div>
+</section>
 </main>
-
 <!-- ============ FOOTER ============ -->
 <footer>
   <div class="wrap">
