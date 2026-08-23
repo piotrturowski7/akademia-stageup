@@ -115,17 +115,6 @@
     padding-bottom:3px;
     display:inline-block;
   }
-  .link-underline::after{
-    content:"";
-    position:absolute;left:0;bottom:0;
-    width:100%;height:1px;
-    background:var(--ink);
-    transform:scaleX(1);
-    transform-origin:left;
-  }
-  .link-underline:hover::after{
-    background:var(--gold-deep);
-  }
   .link-underline .arrow{
     display:inline-block;
     margin-left:4px;
@@ -172,8 +161,6 @@
   .topbar,
   .topbar p,
   .topbar a{color:#FFFFFF;}
-  .topbar .topbar-link::after{background:#FFFFFF;}
-  .topbar .topbar-link:hover::after{background:var(--gold-pale);}
   .topbar .topbar-link:hover{color:var(--gold-pale);}
 
   /* ============ NAV ============ */
@@ -252,51 +239,50 @@
 
   /* ============ HERO ============ */
   .hero{
-    padding-top:var(--sp-6);
-    padding-bottom:var(--sp-6);
+    padding-top:var(--sp-7);
+    padding-bottom:var(--sp-7);
     overflow:hidden;
+    position:relative;
+    /* Tło sekcji: podmień URL poniżej na docelowe zdjęcie */
+    background-image:linear-gradient(rgba(10,9,7,0.55), rgba(10,9,7,0.55)), url("");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-color:var(--cream-alt); /* widoczne, dopóki nie wstawiono zdjęcia */
   }
   .hero-grid{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:var(--sp-5);
+    display:flex;
+    justify-content:center;
+    text-align:center;
+  }
+  .hero-copy{
+    max-width:760px;
+    display:flex;
+    flex-direction:column;
     align-items:center;
   }
-  @media(min-width:900px){
-    .hero-grid{grid-template-columns:1.25fr 1fr;gap:var(--sp-6);}
-  }
-  .hero-copy .eyebrow{color:var(--gold-deep);}
+  .hero-copy .eyebrow{color:var(--gold-pale);}
   .hero h1{
     font-size:clamp(40px,7vw,74px);
-    max-width:12ch;
+    max-width:14ch;
     margin-bottom:var(--sp-3);
+    color:var(--cream);
   }
   .hero h1 em{
     font-style:italic;
     font-weight:400;
-    color:var(--gold-deep);
+    color:var(--gold-pale);
   }
   .hero p.lead{
     font-size:19px;
-    color:var(--ink-soft);
+    color:var(--cream);
     max-width:42ch;
     margin-bottom:var(--sp-4);
     font-weight:300;
   }
-  .hero-ctas{display:flex;flex-wrap:wrap;gap:var(--sp-2);}
-  .hero-visual{position:relative;}
-  .hero-visual .image-slot{width:100%;}
-  .hero-visual .frame-note{
-    position:absolute;
-    bottom:-18px;left:-18px;
-    background:var(--ink);
-    color:var(--cream);
-    font-size:12px;
-    letter-spacing:0.05em;
-    padding:8px 14px;
-    display:none;
-  }
-  @media(min-width:900px){.hero-visual .frame-note{display:block;}}
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:var(--sp-2);justify-content:center;}
+  .hero-ctas .btn-outline{color:var(--cream);border-color:var(--cream);}
+  .hero-ctas .btn-outline:hover{background:var(--cream);color:var(--ink);}
 
   /* ============ CURTAIN DIVIDER (signature element) ============ */
   .curtain-divider{
@@ -608,6 +594,7 @@
 <main id="top">
 
   <!-- ============ HERO ============ -->
+  <!-- Tło sekcji: wstaw URL zdjęcia we właściwości background-image reguły .hero w sekcji <style> -->
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy reveal">
@@ -618,12 +605,6 @@
           <a href="#rekrutacja" class="btn btn-primary">Zapisz się na casting <span class="arrow">→</span></a>
           <a href="#programy" class="btn btn-outline">Zobacz programy</a>
         </div>
-      </div>
-      <div class="hero-visual reveal">
-        <div class="image-slot image-slot-hero image-slot-hero-el">
-          <span>[ZDJĘCIE: uczniowie na scenie, hero]</span>
-        </div>
-        <div class="frame-note">SEZON 2026 / 2027</div>
       </div>
     </div>
   </section>
